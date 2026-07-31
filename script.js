@@ -19,7 +19,9 @@
     burger.setAttribute('aria-label', open ? 'Fechar menu' : 'Abrir menu');
     mm.classList.toggle('is-open', open);
     if (open) { mm.removeAttribute('inert'); } else { mm.setAttribute('inert', ''); }
-    document.body.style.overflow = open ? 'hidden' : '';
+    /* trava no <html>: em <body> o overflow:hidden cria um novo scrollport
+       e o header sticky some quando o menu abre com a página rolada */
+    document.documentElement.style.overflow = open ? 'hidden' : '';
   }
   if (burger && mm) {
     burger.addEventListener('click', function () { setMenu(burger.getAttribute('aria-expanded') !== 'true'); });
